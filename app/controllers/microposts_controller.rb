@@ -4,9 +4,15 @@ class MicropostsController < ApplicationController
 
 
   def create
+    
+        #uri = URI("http://localhost:9998/sol2lun/")
+    response = '{"gregorianDate":"20151214","lunarDate":"20151104"}'
+    parsed_json = JSON.parse response
+    lunarOutput = parsed_json["lunarDate"] #this returns "20151104"
+    
     @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
-      flash[:success] = "Micropost created!"
+      flash[:success] = "Date created!"
       redirect_to root_url
     else
       @feed_items = []
@@ -17,7 +23,7 @@ class MicropostsController < ApplicationController
   
   def destroy
     @micropost.destroy
-    flash[:success] = "Micropost deleted"
+    flash[:success] = "Date deleted"
     redirect_to request.referrer || root_url
   end
 
