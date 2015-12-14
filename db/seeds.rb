@@ -19,3 +19,9 @@ User.create!(name:  "Example User",
                password:              password,
                password_confirmation: password)
 end
+
+users = User.order(:created_at).take(6)
+50.times do
+  content = Faker::Date.between(80.years.ago, Date.today)
+  users.each { |user| user.microposts.create!(content: content) }
+end
